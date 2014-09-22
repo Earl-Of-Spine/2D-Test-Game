@@ -1,5 +1,7 @@
 package ca.cloudspire.greenhills;
 
+import ca.cloudspire.greenhills.graphics.SpriteSheet;
+
 import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -25,6 +27,8 @@ public class GreenHills extends Canvas implements Runnable
     public boolean running = false;
 
     public int tickCount = 0;
+
+   private SpriteSheet spriteSheet = new SpriteSheet("/Sprite_Sheet_Basic.png");
 
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
