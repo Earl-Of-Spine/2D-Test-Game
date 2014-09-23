@@ -1,5 +1,6 @@
 package ca.cloudspire.greenhills;
 
+import ca.cloudspire.greenhills.graphics.Screen;
 import ca.cloudspire.greenhills.graphics.SpriteSheet;
 
 import javax.swing.JFrame;
@@ -28,7 +29,7 @@ public class GreenHills extends Canvas implements Runnable
 
     public int tickCount = 0;
 
-   private SpriteSheet spriteSheet = new SpriteSheet("/Sprite_Sheet_Basic.png");
+    private Screen screen;
 
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
@@ -68,6 +69,8 @@ public class GreenHills extends Canvas implements Runnable
             return;
         }
 
+        screen.render(pixels, 0, WIDTH);
+
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.BLACK);
         g.fillRect(0,0, getWidth(), getHeight());
@@ -88,6 +91,8 @@ public class GreenHills extends Canvas implements Runnable
 
         long lastTimer = System.currentTimeMillis();
         double delta = 0;
+
+        init();
 
         while (running)
         {
@@ -128,6 +133,10 @@ public class GreenHills extends Canvas implements Runnable
                 ticks = 0;
             }
         }
+    }
+
+    public void init() {
+        screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/Sprite_Sheet_Basic.png"));
     }
 
     public synchronized void start()
